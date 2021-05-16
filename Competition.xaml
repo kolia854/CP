@@ -1,0 +1,78 @@
+﻿<Page x:Class="CourseProject.Competition"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseProject"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Competition">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="Main" />
+                <MenuItem Header="Zaplivi"/>
+                <MenuItem Header="participants"/>
+            </Menu>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="27*"/>
+                <ColumnDefinition Width="13*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="Comp" Grid.Column="0"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5">
+                <Label Content="Фамилия имя участника"/>
+                <TextBox/>
+                <Label Content="Пол"/>
+                <TextBox/>
+                <Label Content="Заявленное время"/>
+                <TextBox/>
+                <Label Content="Год рождения"/>
+                <TextBox/>
+                <Label Content="Дистанция"/>
+                <ComboBox>
+                    <TextBlock Text="50 батт"/>
+                    <TextBlock Text="100 батт"/>
+                    <TextBlock Text="200 батт"/>
+
+                    <TextBlock Text="50 на спине"/>
+                    <TextBlock Text="100 на спине"/>
+                    <TextBlock Text="200 на спине"/>
+
+                    <TextBlock Text="50 брасс"/>
+                    <TextBlock Text="100 брасс"/>
+                    <TextBlock Text="200 брасс"/>
+
+                    <TextBlock Text="50 кроль"/>
+                    <TextBlock Text="100 кроль"/>
+                    <TextBlock Text="200 кроль"/>
+                    <TextBlock Text="400 кроль"/>
+                    <TextBlock Text="800 кроль"/>
+                    <TextBlock Text="1500 кроль"/>
+
+                    <TextBlock Text="100 комплекс"/>
+                    <TextBlock Text="200 комплекс"/>
+                    <TextBlock Text="400 комплекс"/>
+                </ComboBox>
+                <Button Content="Добавить" Height="28" Margin="0, 8"/>
+            </StackPanel>
+        </Grid>
+
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Сохранить" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button Content="Отмена" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+        </StackPanel>
+    </Grid>
+</Page>
