@@ -23,6 +23,7 @@ namespace CourseProject
         public Competition()
         {
             InitializeComponent();
+            DataContext =  new CompetitionAddingViewModel();
         }
     }
 }

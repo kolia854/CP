@@ -9,6 +9,16 @@
       Title="CompetitionInfo">
 
     <Grid Background="White">
-        
+        <StackPanel Grid.Row="0">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="Соревнования">
+                    <MenuItem Header="Добавить"/>
+                </MenuItem>
+                <MenuItem Header="Спортсмены">
+                    <MenuItem Header="Добавить"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
     </Grid>
 </Page>

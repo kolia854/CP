@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace CourseProject
 {
-    class Distance : INotifyPropertyChanged
+    [DistanceValidation]
+    public class Distance : INotifyPropertyChanged
     {
         public int distanceID;
+
+        [Required(ErrorMessage = "Дистанция не была выбрана")]
         public int length;
+
+        [Required(ErrorMessage = "Стиль не был выбран")]
         public string style;
+
         public ObservableCollection<Sportsman> participants;
 
         public int Length

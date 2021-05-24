@@ -31,60 +31,53 @@
                 <ColumnDefinition Width="27*"/>
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
-            
-            <DataGrid x:Name="Comp" Grid.Column="0"/>
+
+            <DataGrid ItemsSource="{Binding SavedDistances}"
+                      Grid.Column="0" RenderTransformOrigin="0.5,0.5" 
+                      AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Стиль"
+                                        Binding="{Binding Length}" />
+                    <DataGridTextColumn Header="Дистанция" 
+                                        Binding="{Binding Style}" />
+                </DataGrid.Columns>
+            </DataGrid>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 
                 <StackPanel Grid.Row="0" VerticalAlignment="Center" Margin="5">
                     <Label Content="Дистанции для этого соревнования"/>
-                    
-                    
-                    <Label Content="Комплекс"/>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="200"/>
-                        <CheckBox Content="400"/>
-                    </StackPanel>
+                    <Label Content="Стиль"/>
+                    <ComboBox SelectedItem="{Binding Distance1.Style}">
+                        <TextBlock Text="Баттерфляй"/>
+                        <TextBlock Text="На спине"/>
+                        <TextBlock Text="Брасс"/>
+                        <TextBlock Text="Кроль"/>
+                        <TextBlock Text="Комплекс"/>
+                    </ComboBox>
+                    <Label Content="Дистанция"/>
+                    <ComboBox SelectedItem="{Binding distance1.Length}">
+                        <TextBlock Text="50"/>
+                        <TextBlock Text="100"/>
+                        <TextBlock Text="200"/>
+                        <TextBlock Text="400"/>
+                        <TextBlock Text="800"/>
+                        <TextBlock Text="1500"/>
+                    </ComboBox>
 
-                    <Label Content="Баттерфляй"/>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="50"/>
-                        <CheckBox Content="100"/>
-                        <CheckBox Content="200"/>
-                    </StackPanel>
-                    
-                    <Label Content="На спине"/>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="50"/>
-                        <CheckBox Content="100"/>
-                        <CheckBox Content="200"/>
-                    </StackPanel>
-
-                    <Label Content="Брасс"/>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="50"/>
-                        <CheckBox Content="100"/>
-                        <CheckBox Content="200"/>
-                    </StackPanel>
-
-                    <Label Content="Кроль"/>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="50"/>
-                        <CheckBox Content="100"/>
-                        <CheckBox Content="200"/>
-                        <CheckBox Content="400"/>
-                        <CheckBox Content="800"/>
-                        <CheckBox Content="1500"/>
-                    </StackPanel>
-                    
-                    <Button Grid.Row="1" Content="Выбрать все" Height="28" Margin="0, 4"/>
-                    <Button Grid.Row="1" Content="Добавить" Height="28" Margin="0, 4"/>
+                    <Button Command="{Binding AddCommand}"
+                        Grid.Row="1" Content="Добавить"
+                            Height="28" Margin="0, 4"/>
                 </StackPanel>
-                <DatePicker x:Name="date" Grid.Row="1"/>
+
+                <StackPanel Grid.Row="1">
+                <TextBox Text="{Binding Competition1.Name}" Grid.Row="1"/>
+                <DatePicker SelectedDate="{Binding Competition1.Date}" Grid.Row="1"/>
+                </StackPanel>
             </Grid>
         </Grid>
 
