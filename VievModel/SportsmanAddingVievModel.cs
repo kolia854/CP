@@ -18,13 +18,52 @@ using System.Collections.ObjectModel;
 
 namespace CourseProject
 {
-    //public class SA_VievModel : INotifyPropertyChanged
-    //{
-    //    private List<Sportsman> SavedSportsmen;
+    public class SA_VievModel : INotifyPropertyChanged
+    {
+        private Sportsman sportsman1 = new Sportsman();
+        public Sportsman Sportsman1
+        {
+            get { return sportsman1; }
+            set
+            {
+                sportsman1 = value;
+                OnPropertyChanged("Sportsman1");
+            }
+        }
 
-    //    public AddCommand()
-    //    {
-    //        var sportsman = new Sportsman();
-    //    }
-    //}
+        private ObservableCollection<Sportsman> savedsportsmen = new ObservableCollection<Sportsman>();
+        public ObservableCollection<Sportsman> SavedSportsmen
+        {
+            get { return savedsportsmen; }
+            set
+            {
+                savedsportsmen = value;
+                OnPropertyChanged("SavedSportsmen");
+            }
+        }
+
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                    (addCommand = new RelayCommand(obj =>
+                    { 
+                        SavedSportsmen.Add(sportsman1);
+                        MessageBox.Show(sportsman1.Gender + sportsman1.Trainer + sportsman1.Name);
+                    }));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+    }
 }

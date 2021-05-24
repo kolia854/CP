@@ -16,30 +16,18 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 
-
 namespace CourseProject
-{ 
-    public class MainViewModel : INotifyPropertyChanged
+{
+    class SportsmenPageViewModel : INotifyPropertyChanged
     {
-        private Comp selectedCompetition = new Comp();
-        public Comp SelectedCompetition
+        private Sportsman chosenSportsman = new Sportsman();
+        public Sportsman ChosenSportsman
         {
-            get { return selectedCompetition; }
+            get { return chosenSportsman; }
             set
             {
-                selectedCompetition = value;
-                OnPropertyChanged("SelectedCompetition");
-            }
-        }
-
-        private ObservableCollection<Comp> savedCompetitions = new ObservableCollection<Comp>();
-        public ObservableCollection<Comp> SavedCompetitions
-        {
-            get { return savedCompetitions; }
-            set
-            {
-                savedCompetitions = value;
-                OnPropertyChanged("SavedCompetitions");
+                chosenSportsman = value;
+                OnPropertyChanged("ChosenSportsman");
             }
         }
 

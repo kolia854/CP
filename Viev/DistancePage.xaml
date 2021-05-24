@@ -1,0 +1,100 @@
+﻿<Page x:Class="CourseProject.Viev.DistancePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseProject.Viev"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DistancePage">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="Соревнования">
+                    <MenuItem Header="Добавить"/>
+                </MenuItem>
+                <MenuItem Header="Спортсмены">
+                    <MenuItem Header="Добавить"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
+        <Label Grid.Row="1" HorizontalAlignment="Center"
+               VerticalAlignment="Top" FontSize="24"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="27*"/>
+                <ColumnDefinition Width="13*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid ItemsSource="{Binding Distance1.Participants}"
+                      Grid.Column="0" RenderTransformOrigin="0.5,0.5" 
+                      AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Спортсмен"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Год Рождения" 
+                                        Binding="{Binding Year}" />
+                    <DataGridTextColumn Header="Заявленное время" 
+                                        Binding="{Binding Time}" />
+                    <DataGridTextColumn Header="Разряд"
+                                        Binding="{Binding Rank}"/>
+                    <DataGridTextColumn Header="Заплыв"
+                                        Binding="{Binding Rank}"/>
+                    <DataGridTextColumn Header="Пол"
+                                        Binding="{Binding Rank}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <StackPanel Grid.Column="1">
+                <Label Content="Участник:" Margin="0, 5"/>
+                <ComboBox ItemsSource="{Binding SavedSportsmen}"/>
+                <Label Content="Заявленное время"/>
+                <TextBox Text="{Binding ChosenSportsman.Time}"/>
+                
+                <Button Command="{Binding CreateTemporarySportsman}"
+                        Content="Новый участник" Margin="0, 5"/>
+
+                <StackPanel 
+                    Visibility="{Binding Path = TemporarySportsmanVisibility, 
+                    Converter={StaticResource BoolToVisibilityConverter}}">
+                <Label Content="Фамилия имя участника"/>
+                    <TextBox Text="{Binding TemporarySportsman.Name,
+                        UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Пол"/>
+                    <StackPanel Orientation="Horizontal" Height="20">
+                        <RadioButton Content="М"/>
+                        <RadioButton Content="Ж"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding TemporarySportsman.Gender,
+                        UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Заявленное время"/>
+                    <TextBox Text="{Binding TemporarySportsman.Time,
+                        UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Год рождения"/>
+                    <TextBox Text="{Binding TemporarySportsman.Year, 
+                        UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Button 
+                Command="{Binding SaveSportsman}"
+                VerticalAlignment="Bottom" MaxHeight="20" 
+                Grid.Column="1" Content="Добавить участника"/>
+
+        </Grid>
+        
+    </Grid>
+</Page>

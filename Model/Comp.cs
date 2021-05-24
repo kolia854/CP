@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CourseProject
 {
-    class Comp
+    public class Comp
     {
         int CompID { get; set; }
         string Name { get; set; }
         DateTime Date { get; set; }
-        List<Distance> Distances;
+        List<Distance> Distances { get; set; }
     }
 }
