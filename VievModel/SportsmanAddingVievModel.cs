@@ -49,9 +49,13 @@ namespace CourseProject
             {
                 return addCommand ??
                     (addCommand = new RelayCommand(obj =>
-                    { 
-                        SavedSportsmen.Add(sportsman1);
-                        MessageBox.Show(sportsman1.Gender + sportsman1.Trainer + sportsman1.Name);
+                    {
+                        using (CPContext db = new CPContext())
+                        {
+                            SavedSportsmen.Add(sportsman1);
+                            db.Sportsmen.Add(sportsman1.CreateDBClone());
+                            db.SaveChanges();
+                        }
                     }));
             }
         }

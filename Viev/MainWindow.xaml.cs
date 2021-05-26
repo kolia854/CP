@@ -23,6 +23,7 @@ namespace CourseProject
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Content = new MainPage(MainFrame);
             DataContext = new MainWindowViewModel(MainFrame);
         }
     }

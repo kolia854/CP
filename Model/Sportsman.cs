@@ -96,6 +96,21 @@ namespace CourseProject
             }
         }
 
+        public DBSportsman CreateDBClone()
+        {
+            var dbs = new DBSportsman();
+            dbs.DBSportsmanID = sportsmanID;
+            dbs.name = name;
+            dbs.gender = gender;
+            dbs.rank = rank;
+            dbs.trainer = trainer;
+            dbs.year = year;
+            dbs.race = race;
+            dbs.photo = photo;
+            dbs.time = time;
+            return dbs;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

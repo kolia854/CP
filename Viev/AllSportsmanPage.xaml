@@ -9,8 +9,41 @@
       Title="AllSportsmanPage">
 
     <Grid Background="White">
-        <DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+            HorizontalAlignment="Left">
+
+            <TextBox Text="{Binding SearchText}"/>
             
+        </StackPanel>
+
+        <DataGrid ItemsSource="{Binding SavedSportsmen}"
+                      Grid.Row="1" RenderTransformOrigin="0.5,0.5" 
+                      AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Спортсмен"
+                                        Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Год Рождения" 
+                                        Binding="{Binding Year}" />
+                <DataGridTextColumn Header="Разряд"
+                                        Binding="{Binding Rank}"/>
+                <DataGridTextColumn Header="Пол"
+                                        Binding="{Binding Rank}"/>
+            </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Command="{Binding OpenInfo}" 
+                MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button Command="{Binding Delete}"
+                MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -6,10 +6,11 @@ namespace CourseProject
     {
         public CPContext()
             : base("DbConnection")
-        { }
+        {}
 
-        public DbSet<Comp> Competitions { get; set; }
-        public DbSet<Sportsman> Sportsmen { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<DBComp> Competitions { get; set; }
+        public DbSet<DBDistance> Distances { get; set; }
+        public DbSet<DBSportsman> Sportsmen { get; set; }
+
     }
 }

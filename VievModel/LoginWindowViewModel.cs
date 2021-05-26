@@ -33,6 +33,7 @@ namespace CourseProject
                     (enter = new RelayCommand(obj =>
                     {
                         mainWindow1.Show();
+
                     }));
             }
         }
@@ -42,8 +43,8 @@ namespace CourseProject
         {
             get
             {
-                return enter ??
-                    (enter = new RelayCommand(obj =>
+                return adminEnter ??
+                    (adminEnter = new RelayCommand(obj =>
                     {
                         if (login == "admin" && password == "admin")
                             mainWindow1.Show();

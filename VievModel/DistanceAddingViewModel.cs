@@ -20,6 +20,8 @@ namespace CourseProject
 {
     class DistanceAddingViewModel : INotifyPropertyChanged
     {
+        CPContext db = new CPContext();
+
         private ObservableCollection<Sportsman> savedsportsmen = new ObservableCollection<Sportsman>();
         public ObservableCollection<Sportsman> SavedSportsmen
         {
@@ -30,6 +32,7 @@ namespace CourseProject
                 OnPropertyChanged("SavedSportsmen");
             }
         }
+
 
         private Sportsman chosenSportsman = new Sportsman();
         public Sportsman ChosenSportsman
