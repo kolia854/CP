@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace CourseProject
 {
     /// <summary>
-    /// Interaction logic for DistancePage.xaml
+    /// Interaction logic for AllSportsmanPage.xaml
     /// </summary>
-    public partial class DistancePage : Page
+    public partial class AllSportsmanPage : Page
     {
-        public DistancePage(Frame frame)
+        public AllSportsmanPage()
         {
             InitializeComponent();
-            DataContext = new DistanceAddingViewModel(frame);
         }
     }
 }

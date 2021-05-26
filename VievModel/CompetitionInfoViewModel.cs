@@ -16,12 +16,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 
-
 namespace CourseProject
-{ 
-    public class MainViewModel : INotifyPropertyChanged 
+{
+    class CompetitionInfoViewModel : INotifyPropertyChanged
     {
-        private Frame WorkFrame;
         private Comp selectedCompetition = new Comp();
         public Comp SelectedCompetition
         {
@@ -30,31 +28,6 @@ namespace CourseProject
             {
                 selectedCompetition = value;
                 OnPropertyChanged("SelectedCompetition");
-            }
-        }
-
-        private ObservableCollection<Comp> savedCompetitions = new ObservableCollection<Comp>();
-        public ObservableCollection<Comp> SavedCompetitions
-        {
-            get { return savedCompetitions; }
-            set
-            {
-                savedCompetitions = value;
-                OnPropertyChanged("SavedCompetitions");
-            }
-        }
-
-        private RelayCommand openCompetitionInfoPage;
-        public RelayCommand OpenCompetitionInfoPage
-        {
-            get
-            {
-                return openCompetitionInfoPage ??
-                    (openCompetitionInfoPage = new RelayCommand(obj =>
-                    {
-                        if (selectedCompetition != null)
-                            WorkFrame.Navigate(new CompetitionInfo(selectedCompetition));
-                    }));
             }
         }
 
@@ -68,9 +41,9 @@ namespace CourseProject
             }
         }
 
-        public MainViewModel(Frame frame)
+        public CompetitionInfoViewModel(Comp comp)
         {
-            WorkFrame = frame;
+            selectedCompetition = comp;
         }
     }
 }

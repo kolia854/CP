@@ -146,5 +146,11 @@ namespace CourseProject
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+
+        private Frame WorkFrame;
+        public DistanceAddingViewModel(Frame frame)
+        {
+            WorkFrame = frame;
+        }
     }
 }

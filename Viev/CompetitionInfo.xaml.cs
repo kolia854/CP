@@ -13,16 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CourseProject.Viev
+namespace CourseProject
 {
     /// <summary>
     /// Interaction logic for CompetitionInfo.xaml
     /// </summary>
     public partial class CompetitionInfo : Page
     {
-        public CompetitionInfo()
+        public CompetitionInfo(Comp comp)
         {
             InitializeComponent();
+            DataContext = new CompetitionInfoViewModel(comp);
         }
     }
 }

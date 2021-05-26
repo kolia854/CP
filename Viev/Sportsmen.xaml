@@ -10,21 +10,9 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="45*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <Menu IsMainMenu="True">
-                <MenuItem Header="Соревнования">
-                    <MenuItem Header="Добавить"/>
-                </MenuItem>
-                <MenuItem Header="Спортсмены">
-                    <MenuItem Header="Добавить"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

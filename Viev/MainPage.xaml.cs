@@ -20,10 +20,12 @@ namespace CourseProject
     /// </summary>
     public partial class MainPage : Page
     {
-        public MainPage()
+        public MainPage(Frame WorkFrame)
         {
+            
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(WorkFrame);
+
         }
     }
 }

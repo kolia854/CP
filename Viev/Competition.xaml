@@ -10,12 +10,11 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="85*"/>
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
+        <!--<StackPanel Grid.Row="0">
             <Menu IsMainMenu="True">
                 <MenuItem Header="Соревнования">
                     <MenuItem Header="Добавить"/>
@@ -24,9 +23,9 @@
                     <MenuItem Header="Добавить"/>
                 </MenuItem>
             </Menu>
-        </StackPanel>
+        </StackPanel>-->
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="27*"/>
                 <ColumnDefinition Width="13*"/>
@@ -81,7 +80,7 @@
             </Grid>
         </Grid>
 
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="Сохранить" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button Content="Отмена" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>

@@ -23,20 +23,9 @@ namespace CourseProject
         public LoginWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mw = new MainWindow();
-            mw.Show();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            MainWindow mw = new MainWindow();
-            mw.MainFrame.Content = new MainPage();
-            mw.Show();
-            Close();
+            MainWindow mainWindow = new MainWindow();
+            var password = Password.Password;
+            DataContext = new LoginWindowViewModel(password, mainWindow);
         }
     }
 }

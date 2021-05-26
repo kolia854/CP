@@ -62,6 +62,7 @@ namespace CourseProject
                     (addCommand = new RelayCommand(obj =>
                     {
                         savedDistances.Add(distance1);
+                        WorkFrame.Navigate(new DistancePage(WorkFrame));
                     }));
             }
         }
@@ -74,6 +75,13 @@ namespace CourseProject
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+
+        private Frame WorkFrame;
+
+        public CompetitionAddingViewModel(Frame frame)
+        {
+            WorkFrame = frame;
         }
     }
 }

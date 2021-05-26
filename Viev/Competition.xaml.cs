@@ -20,10 +20,10 @@ namespace CourseProject
     /// </summary>
     public partial class Competition : Page
     {
-        public Competition()
+        public Competition(Frame frame)
         {
             InitializeComponent();
-            DataContext =  new CompetitionAddingViewModel();
+            DataContext =  new CompetitionAddingViewModel(frame);
         }
     }
 }

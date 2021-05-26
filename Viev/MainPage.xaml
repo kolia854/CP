@@ -10,32 +10,22 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="85*"/>
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0">
-            <Menu IsMainMenu="True">
-                <MenuItem Header="Соревнования">
-                    <MenuItem Header="Добавить"/>
-                </MenuItem>
-                <MenuItem Header="Спортсмены">
-                    <MenuItem Header="Добавить"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
 
-
-        <DataGrid Grid.Row="1" x:Name="ServiceGrid" RenderTransformOrigin="0.5,0.5" AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
+        <DataGrid SelectedItem="{Binding SelectedCompetition}"
+                Grid.Row="0" x:Name="CompetitionsGrid" RenderTransformOrigin="0.5,0.5"
+                  AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название соревнования" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Дата проведения" Binding="{Binding Date}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Command="{Binding OpenCompetitionInfoPage}" 
+                MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>

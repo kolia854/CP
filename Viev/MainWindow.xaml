@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <Frame Grid.Row="1" Background="White" x:Name="MainFrame"/>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="88*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="Назад" Command="{Binding OpenPreviousPage}"/>
+                <MenuItem Header="Соревнования">
+                    <MenuItem Header="Открыть" Command="{Binding OpenMainPage}"/>
+                    <MenuItem Header="Добавить" Command="{Binding OpenCompetitionAddingPage}"/>
+                </MenuItem>
+                
+                <MenuItem Header="Спортсмены">
+                    <MenuItem Header="Открыть" Command="{Binding OpenAllSportsmanPage}"/>
+                    <MenuItem Header="Добавить" Command="{Binding OpenSportsmanAddingPage}"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        
+        <Frame Grid.Row="1" Background="White"
+               x:Name="MainFrame" 
+               NavigationUIVisibility="Hidden"/>
+    </Grid>
 </Window>
