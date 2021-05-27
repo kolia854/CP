@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CourseProject
 {
-    class DBDistance
+    public class DBDistance
     {
         public int DBDistanceID { get; set; }
 

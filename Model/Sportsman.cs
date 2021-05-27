@@ -13,7 +13,7 @@ namespace CourseProject
         private string trainer;
         private int year;
         private int race;
-        private DateTime time;
+        private int seconds;
         private byte[] photo;
 
         public string Name
@@ -66,12 +66,12 @@ namespace CourseProject
             }
         }
 
-        public DateTime Time
+        public int Seconds
         {
-            get { return time; }
+            get { return seconds; }
             set
             {
-                time = value;
+                seconds = value;
                 OnPropertyChanged("Time");
             }
         }
@@ -107,7 +107,7 @@ namespace CourseProject
             dbs.year = year;
             dbs.race = race;
             dbs.photo = photo;
-            dbs.time = time;
+            dbs.seconds = seconds;
             return dbs;
         }
 

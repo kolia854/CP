@@ -14,17 +14,6 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
-        <!--<StackPanel Grid.Row="0">
-            <Menu IsMainMenu="True">
-                <MenuItem Header="Соревнования">
-                    <MenuItem Header="Добавить"/>
-                </MenuItem>
-                <MenuItem Header="Спортсмены">
-                    <MenuItem Header="Добавить"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>-->
-
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="27*"/>

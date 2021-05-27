@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CourseProject
 {
-    class DBComp
+    public class DBComp
     {
         public int DBCompID { get; set; }
         public string name { get; set; }

@@ -20,7 +20,7 @@ namespace CourseProject
     /// </summary>
     public partial class DistancePage : Page
     {
-        public DistancePage(Frame frame)
+        public DistancePage(Frame frame, int l, string s)
         {
             InitializeComponent();
             DataContext = new DistanceAddingViewModel(frame);

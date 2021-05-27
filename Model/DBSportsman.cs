@@ -18,7 +18,7 @@ namespace CourseProject
         public string trainer { get; set; }
         public int year { get; set; }
         public int race { get; set; }
-        public DateTime time { get; set; }
+        public int seconds { get; set; }
         public byte[] photo { get; set; }
     }
 }

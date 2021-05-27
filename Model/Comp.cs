@@ -62,5 +62,18 @@ namespace CourseProject
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        public DBComp CreateDBclone()
+        {
+            var c = new DBComp();
+            c.date = date;
+            c.name = name;
+            foreach (var d in distances)
+            {
+                var dc = d.CreateDBClone();
+                c.distances.Add(dc);
+            }
+            return c;
+        }
     }
 }

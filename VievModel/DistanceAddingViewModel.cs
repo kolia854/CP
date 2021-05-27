@@ -110,10 +110,23 @@ namespace CourseProject
                         else
                         {
                             distance1.Participants.Add(chosenSportsman);
-                            MessageBox.Show("added" + chosenSportsman.Time);
                         }
 
-                        //SetupRaces();
+
+                    }));
+            }
+        }
+
+        private RelayCommand saveDistance;
+        public RelayCommand SaveDistance
+        {
+            get
+            {
+                return saveDistance ??
+                    (saveDistance = new RelayCommand(obj =>
+                    {
+                        db.Distances.Add(distance1.CreateDBClone());
+                        db.SaveChanges();
                     }));
             }
         }
@@ -123,7 +136,7 @@ namespace CourseProject
             int counter = 0;
             int racenumber = 0;
             var SortedParticipants = from p in distance1.participants
-                                     orderby p.Time descending
+                                     orderby p.Seconds descending
                                      select p;
 
             distance1.participants.Clear();
