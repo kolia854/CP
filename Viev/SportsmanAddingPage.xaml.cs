@@ -19,6 +19,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 
 namespace CourseProject
@@ -32,6 +34,24 @@ namespace CourseProject
         {
             InitializeComponent();
             DataContext = new SA_VievModel();
+        }
+
+        private void OnlyText(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[a-zA-Zа-яА-Я]{1,}$");
+            e.Handled = !regex.IsMatch(e.Text);
+        }
+
+        private void OnlyNumber(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[^0-9\\s]+$");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void OnlyMF(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[MmFfМмЖж]{1,}$");
+            e.Handled = !regex.IsMatch(e.Text);
         }
     }
 }

@@ -23,9 +23,7 @@ namespace CourseProject
         public LoginWindow()
         {
             InitializeComponent();
-            MainWindow mainWindow = new MainWindow();
-            var password = Password.Password;
-            DataContext = new LoginWindowViewModel(password, mainWindow);
+            DataContext = new LoginWindowViewModel();
         }
     }
 }

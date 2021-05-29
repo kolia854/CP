@@ -10,7 +10,15 @@
 
     <Grid Background="White">
 
-        <Label Content="XYI" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <DataGrid 
+            ItemsSource="{Binding CurrentCompetition}"
+                Grid.Row="0" x:Name="CompetitionsGrid" RenderTransformOrigin="0.5,0.5"
+                  AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Дата проведения" Binding="{Binding Date}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Page>

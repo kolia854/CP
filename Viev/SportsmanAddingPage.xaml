@@ -20,21 +20,27 @@
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
             
-            <Image/>
+            <Image Grid.Column="0"/>
 
             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5">
                 <Label Content="ФИО спортсмена"/>
-                <TextBox Text="{Binding Sportsman1.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding Sportsman1.Name,
+                    UpdateSourceTrigger=PropertyChanged}" 
+                         PreviewTextInput="OnlyText"/>
                 <Label Content="Пол"/>
-                <StackPanel Orientation="Horizontal" Height="20">
-                    <RadioButton Content="М" IsChecked="{Binding Sportsman1.Gender, UpdateSourceTrigger=PropertyChanged}"/>
-                    <RadioButton Content="Ж" IsChecked="{Binding Sportsman1.Gender, UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
+                <TextBox Text="{Binding Sportsman1.Gender}"
+                         MaxLength="1"
+                         PreviewTextInput="OnlyMF"/>
                 <Label Content="Тренер"/>
-                <TextBox Text="{Binding Sportsman1.Trainer, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding Sportsman1.Trainer, 
+                    UpdateSourceTrigger=PropertyChanged}"
+                         PreviewTextInput="OnlyText"/>
                 <Label Content="Год рождения"/>
-                <TextBox Text="{Binding Sportsman1.trainer, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Command="{Binding AddCommand}" Content="Добавить" Height="28" Margin="0, 8"/>
+                <TextBox Text="{Binding Sportsman1.Year,
+                    UpdateSourceTrigger=PropertyChanged}"
+                         PreviewTextInput="OnlyNumber"/>
+                <Button Command="{Binding AddCommand}" 
+                        Content="Добавить" Height="28" Margin="0, 8"/>
             </StackPanel>
         </Grid>
 

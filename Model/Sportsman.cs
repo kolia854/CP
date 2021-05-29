@@ -1,6 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CourseProject
 {
@@ -14,8 +20,10 @@ namespace CourseProject
         private int year;
         private int race;
         private int seconds;
-        private byte[] photo;
+        public List<Distance> Distances { get; set; }
 
+        [Required(ErrorMessage = "Заполните ФИО")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Недопустимая длина имени")]
         public string Name
         {
             get { return name; }
@@ -26,6 +34,8 @@ namespace CourseProject
             }
         }
 
+        [Required(ErrorMessage = "Выберите пол")]
+        [RegularExpression("[МмЖж]", ErrorMessage = "Недопустимое значение")]
         public string Gender
         {
             get { return gender; }
@@ -56,6 +66,8 @@ namespace CourseProject
             }
         }
 
+        [Required(ErrorMessage = "Заполните год рождения")]
+        [Range(1950, 2018)]
         public int Year
         {
             get { return year; }
@@ -66,6 +78,7 @@ namespace CourseProject
             }
         }
 
+        [Range(17, 2000)]
         public int Seconds
         {
             get { return seconds; }
@@ -86,29 +99,37 @@ namespace CourseProject
             }
         }
 
-        public byte[] Photo
-        {
-            get { return photo; }
-            set
-            {
-                photo = value;
-                OnPropertyChanged("Photo");
-            }
-        }
-
         public DBSportsman CreateDBClone()
         {
             var dbs = new DBSportsman();
-            dbs.DBSportsmanID = sportsmanID;
             dbs.name = name;
             dbs.gender = gender;
             dbs.rank = rank;
             dbs.trainer = trainer;
             dbs.year = year;
             dbs.race = race;
-            dbs.photo = photo;
             dbs.seconds = seconds;
+            // вот 
+            foreach (var dist in Distances)
+            {
+                var a = dist.CreateDBClone();
+                dbs.DBDistances.Add(a);
+            }
+            // вот 
             return dbs;
+        }
+
+        public Sportsman Clone()
+        {
+            var a = new Sportsman();
+            a.name = name;
+            a.gender = gender;
+            a.rank = rank;
+            a.trainer = trainer;
+            a.year = year;
+            a.race = race;
+            a.seconds = seconds;
+            return a;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

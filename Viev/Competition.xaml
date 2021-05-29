@@ -40,7 +40,8 @@
                 <StackPanel Grid.Row="0" VerticalAlignment="Center" Margin="5">
                     <Label Content="Дистанции для этого соревнования"/>
                     <Label Content="Стиль"/>
-                    <ComboBox SelectedItem="{Binding Distance1.Style}">
+                    <ComboBox SelectedValuePath="content" 
+                                Text="{Binding Distance1.Style}">
                         <TextBlock Text="Баттерфляй"/>
                         <TextBlock Text="На спине"/>
                         <TextBlock Text="Брасс"/>
@@ -48,7 +49,9 @@
                         <TextBlock Text="Комплекс"/>
                     </ComboBox>
                     <Label Content="Дистанция"/>
-                    <ComboBox SelectedItem="{Binding distance1.Length}">
+                    <ComboBox
+                        SelectedValuePath="content" 
+                        Text="{Binding Distance1.Length}" >
                         <TextBlock Text="50"/>
                         <TextBlock Text="100"/>
                         <TextBlock Text="200"/>
@@ -63,14 +66,25 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1">
-                <TextBox Text="{Binding Competition1.Name}" Grid.Row="1"/>
-                <DatePicker SelectedDate="{Binding Competition1.Date}" Grid.Row="1"/>
+                    <Label Content="Название соревнования"/>
+                    <TextBox Text="{Binding Competition1.Name}"
+                             PreviewTextInput="OnlyText"
+                             Grid.Row="1"/>
+                    <DatePicker IsTodayHighlighted="True"
+                    SelectedDate="{Binding Competition1.Date}"
+                    Grid.Row="1">
+                        <DatePicker.BlackoutDates>
+                            <CalendarDateRange Start="1000-01-01" End="2000-01-01" />
+                            <CalendarDateRange Start="2030-01-01" End="2100-01-01" />
+                        </DatePicker.BlackoutDates>
+                    </DatePicker>
                 </StackPanel>
             </Grid>
         </Grid>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Сохранить" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
+            <Button Command="{Binding SaveCompetition}"
+                Content="Сохранить" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button Content="Отмена" MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>

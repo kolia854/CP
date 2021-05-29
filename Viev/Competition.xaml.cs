@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Text.RegularExpressions;
 using System.Windows.Shapes;
 
 namespace CourseProject
@@ -24,6 +25,12 @@ namespace CourseProject
         {
             InitializeComponent();
             DataContext =  new CompetitionAddingViewModel(frame);
+        }
+
+        private void OnlyText(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[a-zA-Zа-яА-Я]{1,}$");
+            e.Handled = !regex.IsMatch(e.Text);
         }
     }
 }

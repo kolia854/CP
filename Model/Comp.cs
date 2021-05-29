@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace CourseProject 
 {
     public class Comp : INotifyPropertyChanged
     {
         private int compID;
+        [Required(ErrorMessage = "Укажите имя соревнования")]
         private string name;
+        [Required(ErrorMessage = "Укажите дату проведения соревнования")]
+        [Column(TypeName = "datetime2")]
         private DateTime date;
-        private ObservableCollection<Distance> distances;
+        [Required(ErrorMessage = "Добавьте минимум 1 дистанцию")]
+        private ObservableCollection<Distance> distances = new ObservableCollection<Distance>();
 
         public int CompID
         {
@@ -63,11 +70,12 @@ namespace CourseProject
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        public DBComp CreateDBclone()
+        public DBComp CreateDBClone()
         {
             var c = new DBComp();
             c.date = date;
             c.name = name;
+            c.distances = new List<DBDistance>();
             foreach (var d in distances)
             {
                 var dc = d.CreateDBClone();

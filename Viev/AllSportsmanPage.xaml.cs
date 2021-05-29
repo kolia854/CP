@@ -20,9 +20,10 @@ namespace CourseProject
     /// </summary>
     public partial class AllSportsmanPage : Page
     {
-        public AllSportsmanPage()
+        public AllSportsmanPage(Frame frame)
         {
             InitializeComponent();
+            DataContext = new AllSportsmenPageViewModel(frame);
         }
     }
 }

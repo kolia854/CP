@@ -19,6 +19,24 @@ namespace CourseProject
         public int year { get; set; }
         public int race { get; set; }
         public int seconds { get; set; }
-        public byte[] photo { get; set; }
+        public List<DBDistance> DBDistances { get; set; }
+
+        public Sportsman SportsmanClone()
+        {
+            var dbs = new Sportsman();
+            dbs.Name = name;
+            dbs.Gender = gender;
+            dbs.Rank = rank;
+            dbs.Trainer = trainer;
+            dbs.Year = year;
+            dbs.Race = race;
+            dbs.Seconds = seconds;
+            foreach(var dist in DBDistances)
+            {
+                var a = dist.Clone();
+                dbs.Distances.Add(a);
+            }
+            return dbs;
+        }
     }
 }

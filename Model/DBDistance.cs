@@ -12,12 +12,35 @@ namespace CourseProject
 {
     public class DBDistance
     {
-        public int DBDistanceID { get; set; }
+        public int Id { get; set; }
 
         public int Length { get; set; }
 
         public string Style { get; set; }
 
+        public Competition competition { get; set; }
+
         public List<DBSportsman> Participants { get; set; }
+
+        public Distance Clone()
+        {
+            var d = new Distance();
+            d.Length = Length;
+            d.Style = Style;
+            d.competition = competition;
+            try
+            {
+                foreach (var p in Participants)
+                {
+                    var pc = p.SportsmanClone();
+                    d.Participants.Add(pc);
+                }
+            }
+            catch
+            {
+
+            }
+            return d;
+        }
     }
 }

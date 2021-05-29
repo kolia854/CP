@@ -15,10 +15,12 @@ using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
-namespace CourseProject.VievModel
+
+namespace CourseProject
 {
     class AllSportsmenPageViewModel : INotifyPropertyChanged
     {
+        private Frame WorkFrame;
         private ObservableCollection<Sportsman> savedsportsmen = new ObservableCollection<Sportsman>();
         public ObservableCollection<Sportsman> SavedSportsmen
         {
@@ -52,7 +54,18 @@ namespace CourseProject.VievModel
             }
         }
 
-
+        private RelayCommand openInfo;
+        public RelayCommand OpenInfo
+        {
+            get
+            {
+                return openInfo ??
+                    (openInfo = new RelayCommand(obj =>
+                    {
+                        WorkFrame.Navigate(new Sportsmen(WorkFrame, chosenSportsman));
+                    }));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,6 +75,11 @@ namespace CourseProject.VievModel
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+
+        public AllSportsmenPageViewModel(Frame frame)
+        {
+            WorkFrame = frame;
         }
     }
 }

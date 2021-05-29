@@ -33,7 +33,6 @@ namespace CourseProject
             }
         }
 
-
         private Sportsman chosenSportsman = new Sportsman();
         public Sportsman ChosenSportsman
         {
@@ -78,6 +77,17 @@ namespace CourseProject
             }
         }
 
+        private bool savedSportsmenVisibility = true;
+        public bool SavedSportsmenVisibility
+        {
+            get { return savedSportsmenVisibility; }
+            set
+            {
+                savedSportsmenVisibility = value;
+                OnPropertyChanged("SavedSportsmenVisibility");
+            }
+        }
+
         private RelayCommand createTemporarySportsman;
         public RelayCommand CreateTemporarySportsman
         {
@@ -87,6 +97,7 @@ namespace CourseProject
                     (createTemporarySportsman = new RelayCommand(obj =>
                     {
                         TemporarySportsmanVisibility = true;
+                        SavedSportsmenVisibility = false;
                     }));
             }
         }
@@ -99,20 +110,23 @@ namespace CourseProject
                 return saveSportsman ??
                     (saveSportsman = new RelayCommand(obj =>
                     {
+                        var r = new Sportsman();
                         if (distance1.Participants == null)
                             distance1.Participants = new ObservableCollection<Sportsman>();
 
                         if (temporarySportsmanVisibility)
                         {
-                            Distance1.Participants.Add(temporarySportsman);
-                            MessageBox.Show("added" + distance1.Participants[0].Name);
+                            r = temporarySportsman.Clone();
+                            Distance1.Participants.Add(r);
                         }
                         else
                         {
-                            distance1.Participants.Add(chosenSportsman);
+                            r = chosenSportsman.Clone();
+                            chosenSportsman.Distances.Add(Distance1);
+                            Distance1.Participants.Add(r);
                         }
 
-
+                        distance1.SetupRaces();
                     }));
             }
         }
@@ -125,31 +139,28 @@ namespace CourseProject
                 return saveDistance ??
                     (saveDistance = new RelayCommand(obj =>
                     {
+                        if (distance1.participants == null)
+                        {
+                            MessageBox.Show("Нельзя создать дистанцию без участников");
+                            return;
+                        }
                         db.Distances.Add(distance1.CreateDBClone());
                         db.SaveChanges();
+                        WorkFrame.GoBack();
                     }));
             }
         }
 
-        private void SetupRaces()
+        private RelayCommand discardCreation;
+        public RelayCommand DiscardCreation
         {
-            int counter = 0;
-            int racenumber = 0;
-            var SortedParticipants = from p in distance1.participants
-                                     orderby p.Seconds descending
-                                     select p;
-
-            distance1.participants.Clear();
-            foreach (var p in SortedParticipants)
+            get
             {
-                racenumber++;
-                counter = 0;
-                while (counter < 9)
-                {
-                    p.Race = racenumber;
-                    Distance1.participants.Add(p);
-                    counter++;
-                }
+                return discardCreation ??
+                    (discardCreation = new RelayCommand(obj =>
+                    {
+                        WorkFrame.GoBack();
+                    }));
             }
         }
 
@@ -167,6 +178,13 @@ namespace CourseProject
         public DistanceAddingViewModel(Frame frame)
         {
             WorkFrame = frame;
+            //var dBSportsmen = from s in db.Sportsmen
+            //                 where s.name != ""
+            //                 select s;
+            //foreach (var s in dBSportsmen)
+            //{
+            //    savedsportsmen.Add(s.SportsmanClone());
+            //}
         }
     }
 }

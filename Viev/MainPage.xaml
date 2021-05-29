@@ -14,7 +14,9 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid SelectedItem="{Binding SelectedCompetition}"
+        <DataGrid 
+            ItemsSource="{Binding SavedCompetitions}"
+            SelectedItem="{Binding SelectedCompetition}"
                 Grid.Row="0" x:Name="CompetitionsGrid" RenderTransformOrigin="0.5,0.5"
                   AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
             <DataGrid.Columns>

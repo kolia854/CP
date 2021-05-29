@@ -20,6 +20,18 @@ namespace CourseProject
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
+        private bool access;
+        public bool Access
+        {
+            get { return access; }
+            set
+            {
+                access = value;
+                OnPropertyChanged("Access");
+            }
+        }
+
+
         private Frame workFrame;
 
         private RelayCommand openMainPage;
@@ -56,7 +68,7 @@ namespace CourseProject
                 return openAllSportsmanPage ??
                     (openAllSportsmanPage = new RelayCommand(obj =>
                     {
-                        workFrame.Navigate(new AllSportsmanPage());
+                        workFrame.Navigate(new AllSportsmanPage(workFrame));
                     }));
             }
         }
@@ -101,6 +113,7 @@ namespace CourseProject
         public MainWindowViewModel(Frame frame)
         {
             workFrame = frame;
+            Access = User.getInstance().IsAdmin;
         }
     }
 }

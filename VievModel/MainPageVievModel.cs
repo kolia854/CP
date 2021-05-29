@@ -33,8 +33,8 @@ namespace CourseProject
             }
         }
 
-        private ObservableCollection<Comp> savedCompetitions = new ObservableCollection<Comp>();
-        public ObservableCollection<Comp> SavedCompetitions
+        private List<Comp> savedCompetitions = new List<Comp>();
+        public List<Comp> SavedCompetitions
         {
             get { return savedCompetitions; }
             set
@@ -43,6 +43,8 @@ namespace CourseProject
                 OnPropertyChanged("SavedCompetitions");
             }
         }
+
+
 
         private RelayCommand openCompetitionInfoPage;
         public RelayCommand OpenCompetitionInfoPage
@@ -70,7 +72,16 @@ namespace CourseProject
 
         public MainViewModel(Frame frame)
         {
-            WorkFrame = frame;
+            using (CPContext db = new CPContext())
+            {
+                WorkFrame = frame;
+                //var sc = (from c in db.Competitions
+                //                     select c).ToList();
+                //foreach (var c in sc)
+                //{
+                //    savedCompetitions.Add(c.Clone());
+                //}
+            }
         }
     }
 }

@@ -31,6 +31,17 @@ namespace CourseProject
             }
         }
 
+        private Comp currentCompetition = new Comp();
+        public Comp CurrentCompetition
+        {
+            get { return selectedCompetition; }
+            set
+            {
+                selectedCompetition = value;
+                OnPropertyChanged("SelectedCompetition");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(String info)
@@ -43,7 +54,24 @@ namespace CourseProject
 
         public CompetitionInfoViewModel(Comp comp)
         {
-            selectedCompetition = comp;
+            using (CPContext db = new CPContext())
+            {
+                //selectedCompetition = comp;
+                //var comp = db.
+
+        //        var phones = db.Phones.Join(db.Companies, // второй набор
+        //p => p.CompanyId, // свойство-селектор объекта из первого набора
+        //c => c.Id, // свойство-селектор объекта из второго набора
+        //(p, c) => new // результат
+        //{
+        //    Name = p.Name,
+        //    Company = c.Name,
+        //    Price = p.Price
+        //});
+        //        foreach (var p in phones)
+        //            Console.WriteLine("{0} ({1}) - {2}", p.Name, p.Company, p.Price);
+            }
+            
         }
     }
 }

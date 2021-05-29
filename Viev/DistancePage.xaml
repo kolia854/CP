@@ -24,7 +24,8 @@
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
 
-            <DataGrid ItemsSource="{Binding Distance1.Participants}"
+            <DataGrid 
+                    ItemsSource="{Binding Distance1.Participants}"
                       Grid.Column="0" RenderTransformOrigin="0.5,0.5" 
                       AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
                 <DataGrid.Columns>
@@ -33,44 +34,48 @@
                     <DataGridTextColumn Header="Год Рождения" 
                                         Binding="{Binding Year}" />
                     <DataGridTextColumn Header="Заявленное время" 
-                                        Binding="{Binding Time}" />
-                    <DataGridTextColumn Header="Разряд"
-                                        Binding="{Binding Rank}"/>
+                                        Binding="{Binding Seconds}" />
                     <DataGridTextColumn Header="Заплыв"
-                                        Binding="{Binding Rank}"/>
+                                        Binding="{Binding Race}"/>
                     <DataGridTextColumn Header="Пол"
-                                        Binding="{Binding Rank}"/>
+                                        Binding="{Binding Gender}"/>
                 </DataGrid.Columns>
             </DataGrid>
             
             <StackPanel Grid.Column="1">
+                <StackPanel Visibility="{Binding Path = SavedSportsmenVisibility, 
+                    Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Участник:" Margin="0, 5"/>
-                <ComboBox ItemsSource="{Binding SavedSportsmen}"/>
+                <ComboBox ItemsSource="{Binding SavedSportsmen}"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="Name"
+                          SelectedItem="{Binding ChosenSportsman}"/>
                 <Label Content="Заявленное время"/>
-                <TextBox Text="{Binding ChosenSportsman.Time}"/>
+                <TextBox Text="{Binding ChosenSportsman.Seconds}" PreviewTextInput="OnlyNumber"/>
                 
                 <Button Command="{Binding CreateTemporarySportsman}"
                         Content="Новый участник" Margin="0, 5"/>
+                </StackPanel>
 
                 <StackPanel 
                     Visibility="{Binding Path = TemporarySportsmanVisibility, 
                     Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Фамилия имя участника"/>
                     <TextBox Text="{Binding TemporarySportsman.Name,
-                        UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Пол"/>
-                    <StackPanel Orientation="Horizontal" Height="20">
-                        <RadioButton Content="М"/>
-                        <RadioButton Content="Ж"/>
-                    </StackPanel>
+                        UpdateSourceTrigger=PropertyChanged}"
+                             PreviewTextInput="OnlyText"/>
+                    <Label Content="Пол"/>
                     <TextBox Text="{Binding TemporarySportsman.Gender,
-                        UpdateSourceTrigger=PropertyChanged}"/>
+                        UpdateSourceTrigger=PropertyChanged}"
+                             PreviewTextInput="OnlyMF"/>
                 <Label Content="Заявленное время"/>
-                    <TextBox Text="{Binding TemporarySportsman.Time,
-                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Text="{Binding TemporarySportsman.Seconds,
+                        UpdateSourceTrigger=PropertyChanged}"
+                             PreviewTextInput="OnlyNumber"/>
                 <Label Content="Год рождения"/>
                     <TextBox Text="{Binding TemporarySportsman.Year, 
-                        UpdateSourceTrigger=PropertyChanged}"/>
+                        UpdateSourceTrigger=PropertyChanged}"
+                             PreviewTextInput="OnlyNumber"/>
                 </StackPanel>
             </StackPanel>
 
@@ -78,8 +83,16 @@
                 Command="{Binding SaveSportsman}"
                 VerticalAlignment="Bottom" MaxHeight="20" 
                 Grid.Column="1" Content="Добавить участника"/>
-
         </Grid>
+
+        <StackPanel Grid.Row="1">
+            <Button 
+                Command="{Binding SaveDistance}"
+                Content="Сохранить дистанцию"/>
+            <Button 
+                Command="{Binding DiscardCreation}"
+                Content="Назад"/>
+        </StackPanel>
         
     </Grid>
 </Page>

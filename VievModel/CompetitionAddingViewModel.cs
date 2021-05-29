@@ -61,8 +61,51 @@ namespace CourseProject
                 return addCommand ??
                     (addCommand = new RelayCommand(obj =>
                     {
-                        savedDistances.Add(distance1);
-                        WorkFrame.Navigate(new DistancePage(WorkFrame, distance1.length, distance1.style));
+                        var v = new Validation();
+                        var errors = v.Validate(distance1);
+                        if (errors == null)
+                        {
+                            foreach (var dist in savedDistances)
+                            {
+                                if (dist.length == distance1.length && dist.style == distance1.style)
+                                {
+                                    MessageBox.Show("Такая дистанция уже добавлена");
+                                    return;
+                                }
+                            }
+                            savedDistances.Add(distance1);
+                            WorkFrame.Navigate(new DistancePage(WorkFrame, distance1.length, distance1.style));
+                        }
+                        else 
+                        {
+                            MessageBox.Show(errors);
+                        }
+                    }));
+            }
+        }
+
+        private RelayCommand saveCompetition;
+        public RelayCommand SaveCompetition
+        {
+            get
+            {
+                return saveCompetition ??
+                    (saveCompetition = new RelayCommand(obj =>
+                    {
+                        using (CPContext db = new CPContext())
+                        {
+                            var v = new Validation();
+                            var errors = v.Validate(competition1);
+                            if (errors == null)
+                            {
+                                db.Competitions.Add(competition1.CreateDBClone());
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                MessageBox.Show(errors);
+                            }
+                        }
                     }));
             }
         }
@@ -82,6 +125,7 @@ namespace CourseProject
         public CompetitionAddingViewModel(Frame frame)
         {
             WorkFrame = frame;
+
         }
     }
 }

@@ -6,8 +6,22 @@ using System.Threading.Tasks;
 
 namespace CourseProject
 {
-    class User
+    public sealed class User
     {
-        string Role { get; set; }
+        public bool IsAdmin;
+        private static User instance;
+
+        private User()
+        {
+        }
+
+        public static User getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new User();
+            }
+            return instance;
+        }
     }
 }

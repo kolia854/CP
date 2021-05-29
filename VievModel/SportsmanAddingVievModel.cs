@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
+using System.ComponentModel.DataAnnotations;
 
 namespace CourseProject
 {
@@ -52,13 +54,26 @@ namespace CourseProject
                     {
                         using (CPContext db = new CPContext())
                         {
-                            SavedSportsmen.Add(sportsman1);
-                            db.Sportsmen.Add(sportsman1.CreateDBClone());
-                            db.SaveChanges();
+                            sportsman1.Distances = new List<Distance>();
+                            var v = new Validation();
+                            var errors = v.Validate(sportsman1);
+                            if (errors == null)
+                            {
+                                var clone = sportsman1.CreateDBClone();
+                                SavedSportsmen.Add(sportsman1);
+                                db.Sportsmen.Add(clone);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                MessageBox.Show(errors);
+                            }
                         }
                     }));
             }
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

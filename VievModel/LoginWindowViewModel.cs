@@ -20,9 +20,17 @@ namespace CourseProject
 {
     class LoginWindowViewModel : INotifyPropertyChanged
     {
-        private string password;
+        private string Password;
         private string login;
-        private MainWindow mainWindow1;
+        public string Login
+        {
+            get { return login; }
+            set
+            {
+                login = value;
+                OnPropertyChanged("Login");
+            }
+        }
 
         private RelayCommand enter;
         public RelayCommand Enter
@@ -32,8 +40,10 @@ namespace CourseProject
                 return enter ??
                     (enter = new RelayCommand(obj =>
                     {
-                        mainWindow1.Show();
-
+                        var a = User.getInstance();
+                        a.IsAdmin = true;
+                        var mw = new MainWindow();
+                        mw.Show();
                     }));
             }
         }
@@ -46,8 +56,19 @@ namespace CourseProject
                 return adminEnter ??
                     (adminEnter = new RelayCommand(obj =>
                     {
-                        if (login == "admin" && password == "admin")
-                            mainWindow1.Show();
+                        var passwordBox = obj as PasswordBox;
+                        Password = passwordBox.Password;
+                        if (Password == "admin" && login == "admin")
+                        {
+                            var a = User.getInstance();
+                            a.IsAdmin = true;
+                            var mw = new MainWindow();
+                            mw.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Неправильный пароль");
+                        }
                     }));
             }
         }
@@ -60,12 +81,6 @@ namespace CourseProject
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
-        }
-
-        public LoginWindowViewModel(string s, MainWindow main)
-        {
-            password = s;
-            mainWindow1 = main;
         }
     }
 }

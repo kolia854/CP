@@ -24,6 +24,8 @@ namespace CourseProject
 
         public ObservableCollection<Sportsman> participants;
 
+        public Competition competition;
+
         public int Length
         {
             get { return length; }
@@ -65,14 +67,48 @@ namespace CourseProject
         public DBDistance CreateDBClone()
         {
             var d = new DBDistance();
+            d.Participants = new List<DBSportsman>();
             d.Length = length;
             d.Style = style;
-            foreach (var p in participants)
+            d.competition = competition;
+            try
             {
-                var pc = p.CreateDBClone();
-                d.Participants.Add(pc);
+                // вот 
+                foreach (var p in participants)
+                {
+                    var pc = p.CreateDBClone();
+                    d.Participants.Add(pc);
+                }
+                // вот
+            }
+            catch
+            {
+                
             }
             return d;
+        }
+
+        public void SetupRaces()
+        {
+            int counter = 0;
+            int racenumber = 0;
+            var SortedParticipants = (from p in participants
+                                      orderby p.Seconds descending
+                                      select p).ToList();
+
+            participants.Clear();
+            for (int i = 0; i < SortedParticipants.Count(); )
+            {
+                racenumber++;
+                counter = 0;
+                while (counter < 9 && i < SortedParticipants.Count())
+                {
+                    SortedParticipants[i].Race = racenumber;
+                    participants.Add(SortedParticipants[i]);
+                    counter++; 
+                    i++;
+                }
+            }
         }
     }
 }

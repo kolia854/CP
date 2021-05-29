@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="12*"/>
@@ -18,12 +22,18 @@
                 <MenuItem Header="Назад" Command="{Binding OpenPreviousPage}"/>
                 <MenuItem Header="Соревнования">
                     <MenuItem Header="Открыть" Command="{Binding OpenMainPage}"/>
-                    <MenuItem Header="Добавить" Command="{Binding OpenCompetitionAddingPage}"/>
+                    <MenuItem Header="Добавить"
+                              Visibility="{Binding Path = Access, 
+                                Converter={StaticResource BoolToVisibilityConverter}}"
+                              Command="{Binding OpenCompetitionAddingPage}"/>
                 </MenuItem>
                 
                 <MenuItem Header="Спортсмены">
                     <MenuItem Header="Открыть" Command="{Binding OpenAllSportsmanPage}"/>
-                    <MenuItem Header="Добавить" Command="{Binding OpenSportsmanAddingPage}"/>
+                    <MenuItem Header="Добавить" 
+                              Visibility="{Binding Path = Access, 
+                                Converter={StaticResource BoolToVisibilityConverter}}"
+                              Command="{Binding OpenSportsmanAddingPage}"/>
                 </MenuItem>
             </Menu>
         </StackPanel>

@@ -13,14 +13,16 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0" VerticalAlignment="Center">
             <Label Content="Логин"/>
-            <TextBox Text="{Binding login}"
+            <TextBox Text="{Binding Login}"
                 MinHeight="30" MaxHeight="50" MaxLength="10"/>
             <Label Content="Пароль"/>
-            <PasswordBox x:Name="Password"
+            <PasswordBox
+                x:Name="_PasswordBox"
                 MinHeight="30" MaxHeight="50" MaxLength="10"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Center">
             <Button Command="{Binding AdminEnter}"
+                     CommandParameter="{Binding ElementName=_PasswordBox}"
                     Content ="Войти" 
                     MinHeight="30" MaxHeight="80"/>
             <Label Content="Или" HorizontalContentAlignment="Center"/>
