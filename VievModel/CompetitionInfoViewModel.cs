@@ -31,14 +31,14 @@ namespace CourseProject
             }
         }
 
-        private Comp currentCompetition = new Comp();
-        public Comp CurrentCompetition
+        private ObservableCollection<CompetitionResults> results = new ObservableCollection<CompetitionResults>();
+        public ObservableCollection<CompetitionResults> Results
         {
-            get { return selectedCompetition; }
+            get { return results; }
             set
             {
-                selectedCompetition = value;
-                OnPropertyChanged("SelectedCompetition");
+                results = value;
+                OnPropertyChanged("Results");
             }
         }
 
@@ -54,22 +54,25 @@ namespace CourseProject
 
         public CompetitionInfoViewModel(Comp comp)
         {
+            selectedCompetition = comp;
             using (CPContext db = new CPContext())
             {
-                //selectedCompetition = comp;
-                //var comp = db.
-
-        //        var phones = db.Phones.Join(db.Companies, // второй набор
-        //p => p.CompanyId, // свойство-селектор объекта из первого набора
-        //c => c.Id, // свойство-селектор объекта из второго набора
-        //(p, c) => new // результат
-        //{
-        //    Name = p.Name,
-        //    Company = c.Name,
-        //    Price = p.Price
-        //});
-        //        foreach (var p in phones)
-        //            Console.WriteLine("{0} ({1}) - {2}", p.Name, p.Company, p.Price);
+                var distancesinfo = (from d in db.Distances
+                                     where d.competition.DBCompID == selectedCompetition.CompID
+                                     select new
+                                     {
+                                         Style = d.Style,
+                                         Length = d.Length,
+                                         Patricipants = d.Participants.Count()
+                                     }).ToList();
+                foreach (var s in distancesinfo)
+                {
+                    var res = new CompetitionResults();
+                    res.Length = s.Length;
+                    res.ParticipantsCount = s.Patricipants;
+                    res.Style = s.Style;
+                    results.Add(res);
+                }
             }
             
         }

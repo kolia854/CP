@@ -44,6 +44,46 @@ namespace CourseProject
             }
         }
 
+        private Sportsman chosenSportsman = new Sportsman();
+        public Sportsman ChosenSportsman
+        {
+            get { return chosenSportsman; }
+            set
+            {
+                chosenSportsman = value;
+                OnPropertyChanged("ChosenSportsman");
+            }
+        }
+
+        private RelayCommand delete;
+        public RelayCommand Delete
+        {
+            get
+            {
+                return delete ??
+                    (delete = new RelayCommand(obj =>
+                    {
+                        if (chosenSportsman != null)
+                        {
+                            using (CPContext db = new CPContext())
+                            {
+                                var toremove = from s in db.Sportsmen
+                                               where s.DBSportsmanID == chosenSportsman.ID
+                                               select s;
+                                foreach (var s in toremove)
+                                {
+                                    db.Sportsmen.Remove(s);
+                                }
+                                db.SaveChanges();
+                                savedsportsmen.Remove(chosenSportsman);
+                            }
+                        }
+                        else
+                            MessageBox.Show("Выберите в списке спортмена");
+                    }));
+            }
+        }
+
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
@@ -60,7 +100,7 @@ namespace CourseProject
                             if (errors == null)
                             {
                                 var clone = sportsman1.CreateDBClone();
-                                SavedSportsmen.Add(sportsman1);
+                                SavedSportsmen.Add(sportsman1.Clone());
                                 db.Sportsmen.Add(clone);
                                 db.SaveChanges();
                             }
@@ -73,7 +113,19 @@ namespace CourseProject
             }
         }
 
-
+        public SA_VievModel()
+        {
+            using (CPContext db = new CPContext())
+            {
+                var dBSportsmen = from s in db.Sportsmen
+                                  where s.name != ""
+                                  select s;
+                foreach (var s in dBSportsmen)
+                {
+                    savedsportsmen.Add(s.SportsmanClone());
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -22,7 +22,7 @@ namespace CourseProject
         [Required(ErrorMessage = "Стиль не был выбран")]
         public string style;
 
-        public List<Sportsman> participants;
+        public ObservableCollection<Sportsman> participants;
 
         public Comp competition;
 
@@ -46,7 +46,7 @@ namespace CourseProject
             }
         }
 
-        public List<Sportsman> Participants
+        public ObservableCollection<Sportsman> Participants
         {
             get { return participants; }
             set

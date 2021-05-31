@@ -33,6 +33,8 @@ namespace CourseProject
             }
         }
 
+        private Comp competition1 = new Comp();
+
         private Sportsman chosenSportsman = new Sportsman();
         public Sportsman ChosenSportsman
         {
@@ -112,7 +114,7 @@ namespace CourseProject
                     {
                         var r = new Sportsman();
                         if (distance1.Participants == null)
-                            distance1.Participants = new List<Sportsman>();
+                            distance1.Participants = new ObservableCollection<Sportsman>();
 
                         if (temporarySportsmanVisibility)
                         {
@@ -121,11 +123,18 @@ namespace CourseProject
                         }
                         else
                         {
-                            chosenSportsman.Distances = new List<Distance>();
-                            chosenSportsman.Distances.Add(distance1);
-                            r = chosenSportsman.Clone();
-                            chosenSportsman.Distances.Add(Distance1);
-                            Distance1.Participants.Add(r);
+                            if (distance1.participants.Contains(chosenSportsman))
+                            {
+                                MessageBox.Show("Такой участник уже добавлен");
+                            }
+                            else
+                            {
+                                chosenSportsman.Distances = new List<Distance>();
+                                chosenSportsman.Distances.Add(distance1);
+                                r = chosenSportsman.Clone();
+                                chosenSportsman.Distances.Add(Distance1);
+                                Distance1.Participants.Add(r);
+                            }
                         }
 
                         distance1.SetupRaces();
@@ -193,8 +202,6 @@ namespace CourseProject
                     s.Distances = new List<DBDistance>();
                 savedsportsmen.Add(s.SportsmanClone());
             }
-
-
         }
     }
 }

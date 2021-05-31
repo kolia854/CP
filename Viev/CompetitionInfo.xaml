@@ -9,14 +9,26 @@
       Title="CompetitionInfo">
 
     <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
 
-        <DataGrid 
-            ItemsSource="{Binding CurrentCompetition}"
-                Grid.Row="0" x:Name="CompetitionsGrid" RenderTransformOrigin="0.5,0.5"
+        <StackPanel Orientation="Horizontal">
+            <Label FontSize="24"
+                Content="{Binding SelectedCompetition.Name}"/>
+            <Label FontSize="24"
+                Content="{Binding SelectedCompetition.Date}"/>
+        </StackPanel>
+        
+        <DataGrid  
+            ItemsSource="{Binding Results}"
+                Grid.Row="1" x:Name="CompetitionsGrid" RenderTransformOrigin="0.5,0.5"
                   AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Дата проведения" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Дистанция" Binding="{Binding Style}" />
+                <DataGridTextColumn Header="Длина" Binding="{Binding Length}" />
+                <DataGridTextColumn Header="Кол-во участников" Binding="{Binding Participants}" />
             </DataGrid.Columns>
         </DataGrid>
 

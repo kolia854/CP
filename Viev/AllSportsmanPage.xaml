@@ -31,10 +31,10 @@
                                         Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Год Рождения" 
                                         Binding="{Binding Year}" />
-                <DataGridTextColumn Header="Разряд"
-                                        Binding="{Binding Rank}"/>
                 <DataGridTextColumn Header="Пол"
-                                        Binding="{Binding Rank}"/>
+                                        Binding="{Binding Gender}"/>
+                <DataGridTextColumn Header="Тренер"
+                                        Binding="{Binding Trainer}"/>
             </DataGrid.Columns>
         </DataGrid>
 

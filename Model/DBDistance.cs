@@ -28,7 +28,7 @@ namespace CourseProject
             d.Length = Length;
             d.Style = Style;
             d.competition = competition.Clone();
-            d.Participants = new List<Sportsman>();
+            d.Participants = new ObservableCollection<Sportsman>();
             foreach (var s in Participants)
             {
                 d.Participants.Add(s.SportsmanClone());

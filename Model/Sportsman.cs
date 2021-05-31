@@ -123,6 +123,7 @@ namespace CourseProject
         public Sportsman Clone()
         {
             var a = new Sportsman();
+            a.ID = ID;
             a.name = name;
             a.gender = gender;
             a.rank = rank;

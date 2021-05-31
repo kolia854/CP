@@ -19,9 +19,23 @@
                 <ColumnDefinition Width="27*"/>
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
-            
-            <Image Grid.Column="0"/>
 
+            <DataGrid ItemsSource="{Binding SavedSportsmen}"
+                  SelectedItem="{Binding ChosenSportsman}"
+                      Grid.Row="1" RenderTransformOrigin="0.5,0.5" 
+                      AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Спортсмен"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Год Рождения" 
+                                        Binding="{Binding Year}" />
+                    <DataGridTextColumn Header="Пол"
+                                        Binding="{Binding Gender}"/>
+                    <DataGridTextColumn Header="Тренер"
+                                        Binding="{Binding Trainer}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5">
                 <Label Content="ФИО спортсмена"/>
                 <TextBox Text="{Binding Sportsman1.Name,
