@@ -12,7 +12,7 @@ namespace CourseProject
 {
     public class Sportsman : INotifyPropertyChanged 
     {
-        private int sportsmanID;
+        public int ID;
         private string name;
         private string gender;
         private string rank;
@@ -67,7 +67,7 @@ namespace CourseProject
         }
 
         [Required(ErrorMessage = "Заполните год рождения")]
-        [Range(1950, 2018)]
+        [Range(1950, 2018, ErrorMessage = "Год рождения может быть 1950-2018")]
         public int Year
         {
             get { return year; }
@@ -78,7 +78,7 @@ namespace CourseProject
             }
         }
 
-        [Range(17, 2000)]
+        [Range(17, 2000, ErrorMessage = "Время может быть 17-2000 секунд")]
         public int Seconds
         {
             get { return seconds; }
@@ -102,6 +102,7 @@ namespace CourseProject
         public DBSportsman CreateDBClone()
         {
             var dbs = new DBSportsman();
+            dbs.DBSportsmanID = ID;
             dbs.name = name;
             dbs.gender = gender;
             dbs.rank = rank;
@@ -109,13 +110,13 @@ namespace CourseProject
             dbs.year = year;
             dbs.race = race;
             dbs.seconds = seconds;
-            // вот 
-            foreach (var dist in Distances)
+            if (Distances == null)
+                Distances = new List<Distance>();
+            dbs.Distances = new List<DBDistance>();
+            foreach (var s in Distances)
             {
-                var a = dist.CreateDBClone();
-                dbs.DBDistances.Add(a);
+                dbs.Distances.Add(s.CreateDBClone());
             }
-            // вот 
             return dbs;
         }
 

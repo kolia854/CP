@@ -14,7 +14,7 @@
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="7*"/>
@@ -23,7 +23,8 @@
             <Image Grid.Column="0" Source="{Binding ChosenSportsman.Photo}"/>
 
             <StackPanel Grid.Column="1">
-                <Label Content="{Binding ChosenSportsman.Name}"/>
+                <Label FontSize="24" 
+                    Content="{Binding ChosenSportsman.Name}"/>
                 <Label Content="{Binding ChosenSportsman.Year}"/>
                 <Label Content="{Binding ChosenSportsman.Rank}"/>
                 <Label Content="{Binding ChosenSportsman.Trainer}"/>
@@ -31,6 +32,7 @@
             </StackPanel>
         </Grid>
 
-        <DataGrid Grid.Row="2"/> <!--ВОТ ТУТ ЗАПРОС К СОРЕВАМ-->
+        <DataGrid ItemsSource="{Binding Results}" 
+            Grid.Row="1"/>
     </Grid>
 </Page>

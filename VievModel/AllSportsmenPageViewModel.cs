@@ -62,7 +62,39 @@ namespace CourseProject
                 return openInfo ??
                     (openInfo = new RelayCommand(obj =>
                     {
-                        WorkFrame.Navigate(new Sportsmen(WorkFrame, chosenSportsman));
+                        if (chosenSportsman != null)
+                            WorkFrame.Navigate(new Sportsmen(WorkFrame, chosenSportsman));
+                        else
+                            MessageBox.Show("Выберите в списке спортмена");
+                    }));
+            }
+        }
+
+        private RelayCommand delete;
+        public RelayCommand Delete
+        {
+            get
+            {
+                return delete ??
+                    (delete = new RelayCommand(obj =>
+                    {
+                        if (chosenSportsman != null)
+                        {
+                            using (CPContext db = new CPContext())
+                            {
+                                var toremove = from s in db.Sportsmen
+                                                  where s.DBSportsmanID == chosenSportsman.ID
+                                        select s;
+                                foreach (var s in toremove)
+                                {
+                                    db.Sportsmen.Remove(s);
+                                }
+                                db.SaveChanges();
+                                savedsportsmen.Remove(chosenSportsman);
+                            }
+                        }
+                        else
+                            MessageBox.Show("Выберите в списке спортмена");
                     }));
             }
         }
@@ -80,6 +112,16 @@ namespace CourseProject
         public AllSportsmenPageViewModel(Frame frame)
         {
             WorkFrame = frame;
+            using (CPContext db = new CPContext())
+            {
+                var dBSportsmen = from s in db.Sportsmen
+                                  where s.name != ""
+                                  select s;
+                foreach(var s in dBSportsmen)
+                {
+                    savedsportsmen.Add(s.SportsmanClone());
+                }
+            }
         }
     }
 }

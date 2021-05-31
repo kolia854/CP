@@ -21,10 +21,10 @@ namespace CourseProject
     /// </summary>
     public partial class DistancePage : Page
     {
-        public DistancePage(Frame frame, int l, string s)
+        public DistancePage(Frame frame, Comp comp, int l, string s)
         {
             InitializeComponent();
-            DataContext = new DistanceAddingViewModel(frame);
+            DataContext = new DistanceAddingViewModel(frame, comp, l, s);
         }
 
         private void OnlyText(object sender, TextCompositionEventArgs e)

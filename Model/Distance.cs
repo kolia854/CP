@@ -22,9 +22,9 @@ namespace CourseProject
         [Required(ErrorMessage = "Стиль не был выбран")]
         public string style;
 
-        public ObservableCollection<Sportsman> participants;
+        public List<Sportsman> participants;
 
-        public Competition competition;
+        public Comp competition;
 
         public int Length
         {
@@ -46,7 +46,7 @@ namespace CourseProject
             }
         }
 
-        public ObservableCollection<Sportsman> Participants
+        public List<Sportsman> Participants
         {
             get { return participants; }
             set
@@ -56,35 +56,28 @@ namespace CourseProject
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        public Comp Competition
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            get { return competition; }
+            set
+            {
+                competition = value;
+                OnPropertyChanged("Competition");
+            }
         }
-
 
         public DBDistance CreateDBClone()
         {
             var d = new DBDistance();
             d.Participants = new List<DBSportsman>();
+            foreach (var s in Participants)
+            {
+                d.Participants.Add(s.CreateDBClone());
+            }
             d.Length = length;
             d.Style = style;
-            d.competition = competition;
-            try
-            {
-                // вот 
-                foreach (var p in participants)
-                {
-                    var pc = p.CreateDBClone();
-                    d.Participants.Add(pc);
-                }
-                // вот
-            }
-            catch
-            {
-                
-            }
+            d.competition = new DBComp();
+            d.competition = competition.CreateDBClone();
             return d;
         }
 
@@ -109,6 +102,13 @@ namespace CourseProject
                     i++;
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

@@ -28,6 +28,7 @@ namespace CourseProject
             var c = new Comp();
             c.Date = date;
             c.Name = name;
+            c.CompID = DBCompID;
             if (distances != null)
             {
                 foreach (var d in distances)

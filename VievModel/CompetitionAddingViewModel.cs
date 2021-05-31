@@ -38,6 +38,7 @@ namespace CourseProject
             set
             {
                 distance1 = value;
+                distance1.competition = competition1;
                 OnPropertyChanged("Distance1");
             }
         }
@@ -74,7 +75,7 @@ namespace CourseProject
                                 }
                             }
                             savedDistances.Add(distance1);
-                            WorkFrame.Navigate(new DistancePage(WorkFrame, distance1.length, distance1.style));
+                            WorkFrame.Navigate(new DistancePage(WorkFrame, competition1, distance1.length, distance1.style));
                         }
                         else 
                         {

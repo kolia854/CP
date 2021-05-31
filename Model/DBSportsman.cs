@@ -19,11 +19,12 @@ namespace CourseProject
         public int year { get; set; }
         public int race { get; set; }
         public int seconds { get; set; }
-        public List<DBDistance> DBDistances { get; set; }
+        public List<DBDistance> Distances { get; set; }
 
         public Sportsman SportsmanClone()
         {
             var dbs = new Sportsman();
+            dbs.ID = DBSportsmanID;
             dbs.Name = name;
             dbs.Gender = gender;
             dbs.Rank = rank;
@@ -31,10 +32,12 @@ namespace CourseProject
             dbs.Year = year;
             dbs.Race = race;
             dbs.Seconds = seconds;
-            foreach(var dist in DBDistances)
+            dbs.Distances = new List<Distance>();
+            if (Distances == null)
+                Distances = new List<DBDistance>();
+            foreach (var s in Distances)
             {
-                var a = dist.Clone();
-                dbs.Distances.Add(a);
+                dbs.Distances.Add(s.Clone());
             }
             return dbs;
         }

@@ -21,8 +21,8 @@ namespace CourseProject
     class SportsmenPageViewModel : INotifyPropertyChanged
     {
         private Frame WorkFrame;
-        private DBSportsman chosenSportsman = new DBSportsman();
-        public DBSportsman ChosenSportsman
+        private Sportsman chosenSportsman = new Sportsman();
+        public Sportsman ChosenSportsman
         {
             get { return chosenSportsman; }
             set
@@ -32,45 +32,42 @@ namespace CourseProject
             }
         }
 
-        public SportsmenPageViewModel()
+        private List<SportsmanResults> results = new List<SportsmanResults>();
+        public List<SportsmanResults> Results
         {
+            get { return results; }
+            set
+            {
+                results = value;
+                OnPropertyChanged("Results");
+            }
+        }
+
+        public SportsmenPageViewModel(Frame frame, Sportsman sportsman)
+        {
+
+            chosenSportsman = sportsman;
+            WorkFrame = frame;
             using (CPContext db = new CPContext())
             {
-                //var dislis = from a in db.Competitions
-                //             from aa in a.distances
-                //             from aaa in aa.Participants
-                //             select aaa;
-
-                //List results = new List();
-                //IQueryable result;
-                //var dis = db.Distances.Where(d => d.Participants.Contains(chosenSportsman));
-                //foreach (var a in dis)
-                //{
-                //    var sor = db.Competitions.Where(c => c.distances.Contains(a.DBDistanceID => ()));
-                //    result = dis.Join(sor,
-                //        x => x.DBDistanceID,
-                //        y => y.distances,
-                //        (x, y) => new
-                //        {
-                //            CompName = y.name,
-                //            CompDate = y.date,
-                //            Price = x.Length
-
-                //        });
-
-                //}
-
-                //        foreach (var s in dis)
-                //        {
-                //            //var result =
-                //            //    db.Distances.Where(d => d.Participants.Contains(chosenSportsman)).Join(db.Competitions.Where(c => c.distances.Contains(s)),
-                //            //    a => a.DBDistanceID,
-                //            //    b => b.distances => )
-                //        }
-                ////            var phones = db.Phones.Join(db.Companies, // второй набор
-                //          p => p.CompanyId, // свойство-селектор объекта из первого набора
-                //          c => c.Id, // свойство-селектор объекта из второго набора
-                //          (p, c) => new // результат
+                var _results = (from d in db.Distances
+                                where d.Participants.Any(s => s.DBSportsmanID == chosenSportsman.ID)
+                                select new 
+                                {
+                                    Name = d.competition.name,
+                                    Date = d.competition.date,
+                                    Style = d.Style,
+                                    Length = d.Length
+                                }).ToList();
+                foreach(var res in _results)
+                {
+                    var a = new SportsmanResults();
+                    a.CompetitionName = res.Name;
+                    a.Date = res.Date;
+                    a.DistanceStyle = res.Style;
+                    a.DistanceLength = res.Length;
+                    results.Add(a);
+                }
             }
         }
 
@@ -83,12 +80,6 @@ namespace CourseProject
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
-        }
-
-        public SportsmenPageViewModel(Frame frame, Sportsman sportsman)
-        {
-            WorkFrame = frame;
-            chosenSportsman = sportsman.CreateDBClone();
         }
     }
 }

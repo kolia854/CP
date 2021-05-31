@@ -112,7 +112,7 @@ namespace CourseProject
                     {
                         var r = new Sportsman();
                         if (distance1.Participants == null)
-                            distance1.Participants = new ObservableCollection<Sportsman>();
+                            distance1.Participants = new List<Sportsman>();
 
                         if (temporarySportsmanVisibility)
                         {
@@ -121,6 +121,8 @@ namespace CourseProject
                         }
                         else
                         {
+                            chosenSportsman.Distances = new List<Distance>();
+                            chosenSportsman.Distances.Add(distance1);
                             r = chosenSportsman.Clone();
                             chosenSportsman.Distances.Add(Distance1);
                             Distance1.Participants.Add(r);
@@ -175,16 +177,24 @@ namespace CourseProject
         }
 
         private Frame WorkFrame;
-        public DistanceAddingViewModel(Frame frame)
+        public DistanceAddingViewModel(Frame frame, Comp competition, int length, string style)
         {
             WorkFrame = frame;
-            //var dBSportsmen = from s in db.Sportsmen
-            //                 where s.name != ""
-            //                 select s;
-            //foreach (var s in dBSportsmen)
-            //{
-            //    savedsportsmen.Add(s.SportsmanClone());
-            //}
+            distance1.competition = new Comp();
+            distance1.competition = competition;
+            distance1.length = length;
+            distance1.style = style;
+            var dBSportsmen = from s in db.Sportsmen
+                              where s.name != ""
+                              select s;
+            foreach (var s in dBSportsmen)
+            {
+                if (s.Distances == null)
+                    s.Distances = new List<DBDistance>();
+                savedsportsmen.Add(s.SportsmanClone());
+            }
+
+
         }
     }
 }

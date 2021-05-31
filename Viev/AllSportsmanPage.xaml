@@ -18,11 +18,12 @@
         <StackPanel Orientation="Horizontal"
             HorizontalAlignment="Left">
 
-            <TextBox Text="{Binding SearchText}"/>
+            <TextBox Text="{Binding SearchText}" MinWidth="120" MaxHeight="25" HorizontalAlignment="Right"/>
             
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding SavedSportsmen}"
+                  SelectedItem="{Binding ChosenSportsman}"
                       Grid.Row="1" RenderTransformOrigin="0.5,0.5" 
                       AutoGenerateColumns="false" Margin="0,0.333,0.333,-0.333">
             <DataGrid.Columns>
@@ -38,9 +39,11 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Command="{Binding OpenInfo}" 
+            <Button Content="Смотреть" 
+                Command="{Binding OpenInfo}" 
                 MinWidth="100" MaxHeight="40" Margin="3, 0"/>
-            <Button Command="{Binding Delete}"
+            <Button Content="Удалить"
+                Command="{Binding Delete}"
                 MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>
             <Button MinWidth="100" MaxHeight="40" Margin="3, 0"/>

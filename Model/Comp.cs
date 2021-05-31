@@ -73,6 +73,7 @@ namespace CourseProject
         public DBComp CreateDBClone()
         {
             var c = new DBComp();
+            c.DBCompID = compID;
             c.date = date;
             c.name = name;
             c.distances = new List<DBDistance>();

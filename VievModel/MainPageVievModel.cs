@@ -44,7 +44,34 @@ namespace CourseProject
             }
         }
 
-
+        //private RelayCommand delete;          не работает (связи)
+        //public RelayCommand Delete
+        //{
+        //    get
+        //    {
+        //        return delete ??
+        //            (delete = new RelayCommand(obj =>
+        //            {
+        //                if (selectedCompetition != null)
+        //                {
+        //                    using (CPContext db = new CPContext())
+        //                    {
+        //                        var toremove = from s in db.Competitions
+        //                                       where s.DBCompID == selectedCompetition.CompID
+        //                                       select s;
+        //                        foreach (var s in toremove)
+        //                        {
+        //                            db.Competitions.Remove(s);
+        //                        }
+        //                        db.SaveChanges();
+        //                        savedCompetitions.Remove(SelectedCompetition);
+        //                    }
+        //                }
+        //                else
+        //                    MessageBox.Show("Выберите в списке соревнование");
+        //            }));
+        //    }
+        //}
 
         private RelayCommand openCompetitionInfoPage;
         public RelayCommand OpenCompetitionInfoPage
@@ -75,12 +102,12 @@ namespace CourseProject
             using (CPContext db = new CPContext())
             {
                 WorkFrame = frame;
-                //var sc = (from c in db.Competitions
-                //                     select c).ToList();
-                //foreach (var c in sc)
-                //{
-                //    savedCompetitions.Add(c.Clone());
-                //}
+                var sc = (from c in db.Competitions
+                          select c).ToList();
+                foreach (var c in sc)
+                {
+                    savedCompetitions.Add(c.Clone());
+                }
             }
         }
     }

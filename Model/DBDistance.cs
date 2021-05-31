@@ -18,7 +18,7 @@ namespace CourseProject
 
         public string Style { get; set; }
 
-        public Competition competition { get; set; }
+        public DBComp competition { get; set; }
 
         public List<DBSportsman> Participants { get; set; }
 
@@ -27,18 +27,11 @@ namespace CourseProject
             var d = new Distance();
             d.Length = Length;
             d.Style = Style;
-            d.competition = competition;
-            try
+            d.competition = competition.Clone();
+            d.Participants = new List<Sportsman>();
+            foreach (var s in Participants)
             {
-                foreach (var p in Participants)
-                {
-                    var pc = p.SportsmanClone();
-                    d.Participants.Add(pc);
-                }
-            }
-            catch
-            {
-
+                d.Participants.Add(s.SportsmanClone());
             }
             return d;
         }
